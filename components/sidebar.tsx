@@ -3,7 +3,7 @@ import NextLink from "next/link";
 import { Box, List, ListItem, ListIcon, Divider, Center, LinkBox, LinkOverlay } from "@chakra-ui/layout";
 import { MdHome, MdSearch, MdLibraryMusic, MdPlaylistAdd, MdFavorite } from "react-icons/md";
 
-const navMenu = () => [
+const navMenu = [
     {
         name: "Home",
         icon: MdHome,
@@ -30,7 +30,7 @@ const Sidebar = () => {
         paddingX="5px" 
         color="gray" 
         >
-            <Box paddingY="20px">
+            <Box paddingY="20px" height="100%">
                 <Box width="120px" marginBottom="20px" paddingX="20px">
                     <NextImage src="/logo.svg" height={60} width={120} />
                 </Box>
@@ -41,7 +41,11 @@ const Sidebar = () => {
                         <LinkBox>
                         <NextLink href={menu.route} passHref>
                           <LinkOverlay>
-                          <ListIcon as={menu.icon} color="white" marginRight="20px" />
+                          <ListIcon 
+                          as={menu.icon} 
+                          color="white" 
+                          marginRight="20px" 
+                          />
                           {menu.name}
                           </LinkOverlay>
                         </NextLink>
