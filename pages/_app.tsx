@@ -4,6 +4,10 @@ import PlayerLayout from '../components/playerLayout'
 import 'reset-css'
 import { store } from '../lib/store'
 
+// reset css - all this going to do is reset the CSS be the same in every single broswer (all broswers apply default CSS differently)
+
+// This changes the gray to an actual gray color due to the fact
+// chakra's gray can be a bit more blue-ish
 const theme = extendTheme({
   colors: {
     gray: {
@@ -18,6 +22,8 @@ const theme = extendTheme({
       900: '#212121',
     },
   },
+  // components - allows to extend any of the components
+  // variants - is like the type of button(ex: big button, small button, a success button, link button)
   components: {
     Button: {
       variants: {

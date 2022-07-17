@@ -6,7 +6,7 @@ import {
   ListItem,
   ListIcon,
   Divider,
-  Center,
+  // Center,
   LinkBox,
   LinkOverlay,
 } from '@chakra-ui/layout'
@@ -54,6 +54,7 @@ const musicMenu = [
 
 const Sidebar = () => {
   const { playlists } = usePlaylist()
+  // paddingX - padding for the left and right
   return (
     <Box
       width="100%"
@@ -62,16 +63,22 @@ const Sidebar = () => {
       paddingX="5px"
       color="gray"
     >
+      {/* content container */}
+      {/* paddingY - padding for top and bottom */}
       <Box paddingY="20px" height="100%">
+        {/* logo container */}
         <Box width="120px" marginBottom="20px" paddingX="20px">
           <NextImage src="/logo.svg" height={60} width={120} />
         </Box>
+        {/* menu container */}
         <Box marginBottom="20px">
           <List spacing={2}>
             {navMenu.map((menu) => (
               <ListItem paddingX="20px" fontSize="16px" key={menu.name}>
+                {/* nextlink will make it so client side rendering after the inital server render */}
                 <LinkBox>
                   <NextLink href={menu.route} passHref>
+                    {/* the pass href will be passed over to the linkoverlay */}
                     <LinkOverlay>
                       <ListIcon
                         as={menu.icon}
@@ -86,6 +93,7 @@ const Sidebar = () => {
             ))}
           </List>
         </Box>
+        {/* playlist container */}
         <Box marginTop="20px">
           <List spacing={2}>
             {musicMenu.map((menu) => (
