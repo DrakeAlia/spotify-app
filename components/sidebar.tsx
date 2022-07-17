@@ -70,7 +70,7 @@ const Sidebar = () => {
         <Box width="120px" marginBottom="20px" paddingX="20px">
           <NextImage src="/logo.svg" height={60} width={120} />
         </Box>
-        {/* menu container */}
+        {/* nav menu container */}
         <Box marginBottom="20px">
           <List spacing={2}>
             {navMenu.map((menu) => (
@@ -93,7 +93,7 @@ const Sidebar = () => {
             ))}
           </List>
         </Box>
-        {/* playlist container */}
+        {/* music menu container */}
         <Box marginTop="20px">
           <List spacing={2}>
             {musicMenu.map((menu) => (
@@ -115,6 +115,7 @@ const Sidebar = () => {
           </List>
         </Box>
         <Divider color="gray.800" />
+        {/* playlist container */}
         <Box height="66%" overflowY="auto" paddingY="20px">
           <List spacing={2}>
             {playlists.map((playlist) => (

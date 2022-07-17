@@ -87,10 +87,9 @@ const Player = ({ songs, activeSong }) => {
         if (next === state) {
           return nextSong()
         }
-        // return next
-      } else {
-        return state === songs.length - 1 ? 0 : state + 1
+        return next
       }
+      return state === songs.length - 1 ? 0 : state + 1
     })
   }
 
