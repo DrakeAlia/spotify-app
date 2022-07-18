@@ -2,16 +2,34 @@ import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
 import { artistsData } from './songsData'
 
+// Next.js allows you write back end code inside the front end components(fullstack framework that does both)
+// It comes with an api folder that has serverless functions in every one of those files
+// We can also use the db directly inside the components without going through the api
+// Making so it so that there's just less overhead and that we can deploy to one platform versus two different platforms and all the code lives together
+// And with prisma, we get type checks
+// During production, this you would put prisma here in this file
+
+// PrismaClient is an auto-generated and type-safe query builder that's tailored to your data.
+
+// bcyrpt is a library that helps you hash passwords
+
+// Prisma handles the db connection for us
 const prisma = new PrismaClient()
 
+// upsert means to update or create(if it exist, then update it to this and if it doesn't exist then create it with this)
 const run = async () => {
   await Promise.all(
     artistsData.map(async (artist) => {
       return prisma.artist.upsert({
+        // where - find any artists whose name equals artist.name
         where: { name: artist.name },
+        // update - if you find the artist, then update it with nothing(this is a seed scriptm not trying to update anything)
         update: {},
+        // create - if you don't find the artist, then create this artist
         create: {
+          // artist has a name
           name: artist.name,
+          // artist has a song(s) - has a song array
           songs: {
             create: artist.songs.map((song) => ({
               name: song.name,
@@ -59,8 +77,10 @@ const run = async () => {
 run()
   .catch((e) => {
     console.error(e)
+    // exit 1 - means error in the terminal, 0 means non error
     process.exit(1)
   })
   .finally(async () => {
+    // disconnects the db so it's not just some lingering db connection going around
     await prisma.$disconnect()
   })

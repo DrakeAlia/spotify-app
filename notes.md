@@ -17,3 +17,13 @@ To Do:
 -Search and library and create a playlist just stay coming soon ()
 
 -Make the artist card clickable so I can see the artist's songs ()
+
+
+
+Prisma steps for database and migrations:
+1. npx prisma db push
+2. npx prisma migration dev
+3. Give migration a name
+
+To check db live:
+npx prisma studio
