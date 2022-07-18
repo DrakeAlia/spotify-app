@@ -19,6 +19,8 @@ import {
 } from 'react-icons/md'
 import { usePlaylist } from '../lib/hooks'
 
+// This component renders everything inside the Sidebar container
+
 const navMenu = [
   {
     name: 'Home',
@@ -50,6 +52,7 @@ const musicMenu = [
   },
 ]
 
+// Static data for playlist:
 // const playlists = new Array(30).fill(1).map((_, i) => `Playlist ${i + 1}`)
 
 const Sidebar = () => {
@@ -63,22 +66,25 @@ const Sidebar = () => {
       paddingX="5px"
       color="gray"
     >
-      {/* content container */}
+      {/* Content Container */}
       {/* paddingY - padding for top and bottom */}
       <Box paddingY="20px" height="100%">
-        {/* logo container */}
+        {/* Logo Container */}
         <Box width="120px" marginBottom="20px" paddingX="20px">
           <NextImage src="/logo.svg" height={60} width={120} />
         </Box>
-        {/* nav menu container */}
+        {/* Nav Menu Container */}
         <Box marginBottom="20px">
+          {/* List spacing keeps items spaced from each other */}
           <List spacing={2}>
             {navMenu.map((menu) => (
               <ListItem paddingX="20px" fontSize="16px" key={menu.name}>
-                {/* nextlink will make it so client side rendering after the inital server render */}
                 <LinkBox>
+                  {/* NextLink will make it so client side rendering after the inital server render */}
                   <NextLink href={menu.route} passHref>
-                    {/* the pass href will be passed over to the linkoverlay */}
+                    {/* The href will be passed over to the LinkOverlay */}
+                    {/* Link overlay is a semantic component used to wrap elements
+                    (cards, blog post, articles, etc.) in a link. */}
                     <LinkOverlay>
                       <ListIcon
                         as={menu.icon}
@@ -93,7 +99,7 @@ const Sidebar = () => {
             ))}
           </List>
         </Box>
-        {/* music menu container */}
+        {/* Music Menu Container */}
         <Box marginTop="20px">
           <List spacing={2}>
             {musicMenu.map((menu) => (
@@ -115,7 +121,8 @@ const Sidebar = () => {
           </List>
         </Box>
         <Divider color="gray.800" />
-        {/* playlist container */}
+        {/* Playlist Container */}
+        {/* overflowY="auto" - is going to allow scrolling in the sidebar */}
         <Box height="66%" overflowY="auto" paddingY="20px">
           <List spacing={2}>
             {playlists.map((playlist) => (

@@ -1,10 +1,17 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// Our db is on heroku and prisma just needs to know the URL for the database to connect to
+
 generator client {
   provider = "prisma-client-js"
 }
 
+// Shadow DB - We use another db called shadow db because when prisma does its migrations it does something called shadow db, where it makes another db
+// But on Heroku, for the free postgres that they give you, the user that's assigned to that does not have the permission to create a db
+// So the work around is to make another db until prisma to use this db of the shadow db and this database is the real db to get around the permission issue on heroku
+// So that's the only drawback of using heroku, might be simpler to click then to get some docker thing and deploy to elastic
+// If your going to use locally on the computer, make sure the user on postgres has permission to create db(admin permission or if you deploy it somewhere else in which case you need one URL)
 datasource db {
   provider          = "postgresql"
   url               = env("DATABASE_URL")
@@ -12,42 +19,42 @@ datasource db {
 }
 
 model User {
-  id         Int        @id @default(autoincrement())
-  createdAt  DateTime   @default(now())
-  updatedApp DateTime   @updatedAt
-  email      String     @unique
-  firstName  String
-  lastName   String
-  password   String
-  playlists  Playlist[]
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  email     String     @unique
+  firstName String
+  lastName  String
+  password  String
+  playlists Playlist[]
 }
 
 model Song {
-  id         Int        @id @default(autoincrement())
-  createdAt  DateTime   @default(now())
-  updatedApp DateTime   @updatedAt
-  name       String
-  artist     Artist     @relation(fields: [artistId], references: [id])
-  artistId   Int
-  playlists  Playlist[]
-  duration   Int
-  url        String
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  name      String
+  artist    Artist     @relation(fields: [artistId], references: [id])
+  artistId  Int
+  playlists Playlist[]
+  duration  Int
+  url       String
 }
 
 model Artist {
-  id         Int      @id @default(autoincrement())
-  createdAt  DateTime @default(now())
-  updatedApp DateTime @updatedAt
-  songs      Song[]
-  name       String   @unique
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  songs     Song[]
+  name      String   @unique
 }
 
 model Playlist {
-  id         Int      @id @default(autoincrement())
-  createdAt  DateTime @default(now())
-  updatedApp DateTime @updatedAt
-  name       String
-  songs      Song[]
-  user       User     @relation(fields: [userId], references: [id])
-  userId     Int
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  songs     Song[]
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
 }
