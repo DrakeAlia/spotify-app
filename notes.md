@@ -10,7 +10,7 @@ To Do:
 
 -If the user already is already logged in direct them to the main page ()
 
-    -https://spotify-app-jade.vercel.app/signin
+-https://spotify-app-jade.vercel.app/signin
 
 -Check to see if they are already signed in and bring them to the main page ()
 
@@ -18,9 +18,8 @@ To Do:
 
 -Make the artist card clickable so I can see the artist's songs ()
 
-
-
 Prisma steps for database and migrations:
+
 1. npx prisma db push
 2. npx prisma migration dev
 3. Give migration a name
