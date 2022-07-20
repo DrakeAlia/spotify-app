@@ -4,6 +4,8 @@ import cookie from 'cookie'
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../lib/prisma'
 
+// This is where the user signs up... creating a cookie for that user
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const salt = bcrypt.genSaltSync()
   const { email, password } = req.body
@@ -29,10 +31,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       id: user.id,
       time: Date.now(),
     },
+    // key (secret)
     'hello',
     { expiresIn: '8h' }
   )
-
+  // Cookie is created
   res.setHeader(
     'Set-Cookie',
     cookie.serialize('TRAX_ACCESS_TOKEN', token, {

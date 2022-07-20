@@ -20,6 +20,7 @@ const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
+  // handles for sigin in/sigin up button when submitted
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsLoading(true)

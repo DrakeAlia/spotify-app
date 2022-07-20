@@ -4,6 +4,7 @@ import cookie from 'cookie'
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../lib/prisma'
 
+// These functions here are handlers(its a function that takes a request and a response)
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { email, password } = req.body
 
@@ -26,6 +27,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       }
     )
 
+    
+    
     res.setHeader(
       'Set-Cookie',
       cookie.serialize('TRAX_ACCESS_TOKEN', token, {
@@ -35,10 +38,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         sameSite: 'lax',
         secure: process.env.NODE_ENV === 'production',
       })
-    )
-
-    res.json(user)
-  } else {
+      )
+      
+      res.json(user)
+    } else {
     res.status(401)
     res.json({ error: 'Email or Password is incorrect' })
   }

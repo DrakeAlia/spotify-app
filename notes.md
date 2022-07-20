@@ -2,7 +2,7 @@ To Do:
 
 -Register button ()
 
--Log out button ()
+-Log out button (X)
 
 -Rename the project ()
 
@@ -18,6 +18,7 @@ To Do:
 
 -Make the artist card clickable so I can see the artist's songs ()
 
+--------------------------------------------------------------------------------------------
 Prisma steps for database and migrations:
 
 1. npx prisma db push

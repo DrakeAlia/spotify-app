@@ -1,8 +1,10 @@
 import { Box, Text, Flex } from '@chakra-ui/layout'
-import { Image } from '@chakra-ui/react'
+import { Image, Button } from '@chakra-ui/react'
 import GradientLayout from '../components/gradientLayout'
 import { useMe } from '../lib/hooks'
 import prisma from '../lib/prisma'
+
+// This component renders out the user's profile (their name, public playlists) and their top artists of the month
 
 const Home = ({ artists }) => {
   const { user } = useMe()
@@ -18,6 +20,14 @@ const Home = ({ artists }) => {
       // image="https://media-exp2.licdn.com/dms/image/C5603AQGL5eIcDgi8Rw/profile-displayphoto-shrink_800_800/0/1579064270982?e=1663200000&v=beta&t=IdwwEW4DTIF8Sv3ypT93Ll5Y28C_icvCgsr7l2tj9f0"
     >
       <Box color="white" paddingX="40px">
+        <Button
+          onClick={() => {
+            console.log('hello')
+          }}
+          type="submit"
+        >
+          Logout
+        </Button>
         <Box marginBottom="40px">
           <Text fontSize="2xl" fontWeight="bold">
             Top artist this month
