@@ -19,8 +19,11 @@ import {
 } from 'react-icons/md'
 import { usePlaylist } from '../lib/hooks'
 
+// LinkOverlay and LinkBox allows us to make a click target which is bascially a word but have a bigger surface which is the size of a whole link item
 // This component renders everything inside the Sidebar container
 
+// Make some data and create the menus and then we can map over these menus and just write one component
+// And our menus will be arrays
 const navMenu = [
   {
     name: 'Home',
@@ -57,7 +60,10 @@ const musicMenu = [
 
 const Sidebar = () => {
   const { playlists } = usePlaylist()
+  // Be 100% of your parent because there's already a box around the sidebar component which already has a width in Playerlayout
+  // height=calc(100vh - 100px) - calculate this being 100vh minus the 100px of the player bar
   // paddingX - padding for the left and right
+  // paddingY - padding for top and bottom
   return (
     <Box
       width="100%"
@@ -67,10 +73,10 @@ const Sidebar = () => {
       color="gray"
     >
       {/* Content Container */}
-      {/* paddingY - padding for top and bottom */}
       <Box paddingY="20px" height="100%">
         {/* Logo Container */}
         <Box width="120px" marginBottom="20px" paddingX="20px">
+          {/* Put logo into the public folder on the root of the project */}
           <NextImage src="/logo.svg" height={60} width={120} />
         </Box>
         {/* Nav Menu Container */}
@@ -83,7 +89,7 @@ const Sidebar = () => {
                   {/* NextLink will make it so client side rendering after the inital server render */}
                   <NextLink href={menu.route} passHref>
                     {/* The href will be passed over to the LinkOverlay */}
-                    {/* Link overlay is a semantic component used to wrap elements
+                    {/* LinkOverlay is a semantic component used to wrap elements
                     (cards, blog post, articles, etc.) in a link. */}
                     <LinkOverlay>
                       <ListIcon
@@ -120,6 +126,7 @@ const Sidebar = () => {
             ))}
           </List>
         </Box>
+        {/* This will put a space between our sections of menus  */}
         <Divider color="gray.800" />
         {/* Playlist Container */}
         {/* overflowY="auto" - is going to allow scrolling in the sidebar */}

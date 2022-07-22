@@ -4,6 +4,13 @@ import PlayerLayout from '../components/playerLayout'
 import 'reset-css'
 import { store } from '../lib/store'
 
+// This is our root of our application, the entry point to every point to every page on the component/every page on your app
+
+// Normally you have to bootstrapped your react app to the DOM, except you don't have to do that because Next.js does that for you
+// and the undercore of _app.tsx just means don't make a route for this
+// If we got rid of the underscore, Next.js would make a route called slash app and it will load that component, which is not what we want here
+
+// Easy Peasy is an abstraction of Redux, providing a reimagined API that focuses on developer experience. It allows you to quickly and easily manage your state, whilst leveraging the strong architectural guarantees and extensive eco-system that Redux has to offer.
 // reset css - all this going to do is reset the CSS be the same in every single broswer (all broswers apply default CSS differently)
 
 // This changes the gray to an actual gray color due to the fact
@@ -39,6 +46,13 @@ const theme = extendTheme({
 })
 
 const MyApp = ({ Component, pageProps }) => {
+  // A provider is just like a component that provides context for your whole app
+  // Context is state that can be shared and accessed at any component
+  // A provider just gives every component rendered inside of it access to that context
+
+  // Wrap our component inside the ChakraProvider and pass the theme which is called theme
+  // Wrap the component with Playerlayout not the ChakraProvider, we want to stay in the ChakraProvider
+  // otherwise our layout would have access to any of our theme primitives
   return (
     <ChakraProvider theme={theme}>
       <StoreProvider store={store}>
