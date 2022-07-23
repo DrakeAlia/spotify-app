@@ -1,5 +1,6 @@
 import { Box, Text, Flex } from '@chakra-ui/layout'
 import { Image, Button } from '@chakra-ui/react'
+import cookie from 'cookie'
 import GradientLayout from '../components/gradientLayout'
 import { useMe } from '../lib/hooks'
 import prisma from '../lib/prisma'
@@ -21,10 +22,12 @@ const Home = ({ artists }) => {
     >
       <Box color="white" paddingX="40px">
         <Button
+          bg="green.500"
+          type="submit"
           onClick={() => {
+            cookie.remove('TRAX_ACCESS_TOKEN')
             console.log('hello')
           }}
-          type="submit"
         >
           Logout
         </Button>
