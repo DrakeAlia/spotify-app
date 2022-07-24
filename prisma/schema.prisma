@@ -17,7 +17,11 @@ datasource db {
   url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
+
 // model for the user which will be unique
+// id        Int        @id @default(autoincrement()) - I want an id field, its type is integer, so it'll be a number. This is the id field of this model, so it's going to make it unique. 
+// default we want to auto increment so every time a new user is saved go up by 1
+// updatedAt DateTime   @updatedAt - That'll auto set that field for you every time you update an instance of a user
 model User {
   id        Int        @id @default(autoincrement())
   createdAt DateTime   @default(now())
@@ -29,6 +33,8 @@ model User {
   playlists Playlist[]
 }
 
+// song will not be unique because there are songs with the same names
+// artist    Artist     @relation(fields: [artistId], references: [id]) - Is going to map to the artist ID, so that's how it knows what artists to go to. And it's referencing the ID field on the artist which is in the Artist model field for id
 model Song {
   id        Int        @id @default(autoincrement())
   createdAt DateTime   @default(now())
@@ -40,7 +46,8 @@ model Song {
   duration  Int
   url       String
 }
-// model for the artist which will be unique
+
+// model for the artist which will be unique in terms of the artist's name
 model Artist {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
@@ -49,6 +56,7 @@ model Artist {
   name      String   @unique
 }
 
+// model for the playlist which will have a reference to the user's id that's associated with that playlist
 model Playlist {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
@@ -58,3 +66,15 @@ model Playlist {
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
 }
+
+// npx prisma db push - Which is almost the same as a migration but it doesn't create a history
+// It's bascially meant for prototyping the schema without fully committing.
+// Once you push up, you'll get some confirmation that prisma is in sync with your db that you deployed. 
+// Then it'll say generated a prisma client which means that we've notified the db about these schema changes. 
+// And generated a client that is gonna be used for us to query the db and it's gonna come with types generated based off our schema
+// Always db push whenever you change anything in the schema 
+
+// npx prisma migrate dev - Basically confirms the db changes that we made(sort like a git push) and push these migrations up to the db
+// It'll give us a diff of all the schemas and ask if you want to continue, in which it'll reset the PostgresSQL db
+// After that it'll ask you to give your migrations a name to describe want you did on this db change 
+// Finally you will see that you've made a new migration, it'll create a file for that migration as well and then it also generated the prisma client again to generate those types for TS based off of our schema

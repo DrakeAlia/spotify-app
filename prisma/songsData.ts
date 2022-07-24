@@ -1,3 +1,4 @@
+// This is an array of artists and songs
 export const artistsData: {
   name: string
   songs: any[]

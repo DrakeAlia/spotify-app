@@ -54,7 +54,9 @@ const musicMenu = [
   },
 ]
 
-// Static data for playlist:
+// Static data(until we get real data) for playlists isnide the playlist menu, which is just an array of 30 strings that say playlist followed by a number
+// This is just a quick way to make an array, new array, how many things you want in it
+// So just fill it with anything, loop over that with a map and return some strings
 // const playlists = new Array(30).fill(1).map((_, i) => `Playlist ${i + 1}`)
 
 const Sidebar = () => {
@@ -83,10 +85,12 @@ const Sidebar = () => {
         <Box marginBottom="20px">
           {/* List spacing keeps items spaced from each other */}
           <List spacing={2}>
+            {/* Map over the navigation menus */}
             {navMenu.map((menu) => (
               <ListItem paddingX="20px" fontSize="16px" key={menu.name}>
                 <LinkBox>
                   {/* NextLink will make it so client side rendering after the inital server render */}
+                  {/* passHref - Forces Link to send the href property to its child. Defaults to false */}
                   <NextLink href={menu.route} passHref>
                     {/* The href will be passed over to the LinkOverlay */}
                     {/* LinkOverlay is a semantic component used to wrap elements
@@ -108,6 +112,7 @@ const Sidebar = () => {
         {/* Music Menu Container */}
         <Box marginTop="30px">
           <List spacing={2}>
+            {/* Map over the music menus */}
             {musicMenu.map((menu) => (
               <ListItem paddingX="20px" fontSize="16px" key={menu.name}>
                 <LinkBox>
@@ -132,10 +137,13 @@ const Sidebar = () => {
         {/* Playlist Container */}
         {/* overflowY="auto" - is going to allow scrolling in the sidebar */}
         <Box height="66%" overflowY="auto" paddingY="20px">
+          {/* Give each playlist item a spacing of 2 */}
           <List spacing={2}>
+            {/* Map over the playlists items */}
             {playlists.map((playlist) => (
               <ListItem paddingX="20px" key={playlist.id}>
                 <LinkBox>
+                  {/* When you click on a playlist, it'll take you to that playlist's id route  */}
                   <NextLink
                     href={{
                       pathname: '/playlist/[id]',

@@ -2,6 +2,8 @@ import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
 import { artistsData } from './songsData'
 
+// This component allows to get some data in the db(specifically some playlists, etc. and populate our sidebar with some playlists, we can do some authentication)
+
 // Next.js allows you write back end code inside the front end components(fullstack framework that does both)
 // It comes with an api folder that has serverless functions in every one of those files
 // We can also use the db directly inside the components without going through the api
@@ -16,14 +18,16 @@ import { artistsData } from './songsData'
 // Prisma handles the db connection for us
 const prisma = new PrismaClient()
 
-// upsert means to update or create(if it exist, then update it to this and if it doesn't exist then create it with this)
+// Create a function called run that is async function for our seed script and the first thing we wanna seed is we wanna insert the artist and the songs into the db followed by a user and then followed by some playlists that have all those songs that belong to the user
+// That way we can log in with a user that already has playlists, that already has songs in it, that belong to an artist
 const run = async () => {
   await Promise.all(
     artistsData.map(async (artist) => {
+      // upsert means to update or create(if it exist, then update it to this and if it doesn't exist then create it with this)
       return prisma.artist.upsert({
         // where - find any artists whose name equals artist.name
         where: { name: artist.name },
-        // update - if you find the artist, then update it with nothing(this is a seed scriptm not trying to update anything)
+        // update - if you find the artist, then update it with nothing(this is a seed script not trying to update anything)
         update: {},
         // create - if you don't find the artist, then create this artist
         create: {
@@ -75,6 +79,7 @@ const run = async () => {
 }
 
 run()
+  // if there is an error, just exit this process
   .catch((e) => {
     console.error(e)
     // exit 1 - means error in the terminal, 0 means non error
