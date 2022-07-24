@@ -1,6 +1,6 @@
 import { Box, Text, Flex } from '@chakra-ui/layout'
 import { Image, Button } from '@chakra-ui/react'
-import cookie from 'cookie'
+// import cookie from 'cookie'
 import GradientLayout from '../components/gradientLayout'
 import { useMe } from '../lib/hooks'
 import prisma from '../lib/prisma'
@@ -25,7 +25,14 @@ const Home = ({ artists }) => {
           bg="green.500"
           type="submit"
           onClick={() => {
-            cookie.remove('TRAX_ACCESS_TOKEN')
+            // cookie.remove('TRAX_ACCESS_TOKEN')
+
+            // fetch('/api/logout', {
+            //   headers: {
+            //     'Content-Type': 'application/json',
+            //   },
+            //   body: JSON.stringify({}),
+            // })
             console.log('hello')
           }}
         >

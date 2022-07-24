@@ -5,7 +5,7 @@ import { useSWRConfig } from 'swr'
 import NextImage from 'next/image'
 import { auth } from '../lib/mutations'
 
-// This component toggles what mode you are in for sign in or sign up and authenticates it
+// This component toggles what mode you are in for sign in page or sign up page and authenticates it
 
 // Up until this point we haven't had to touch the router because next.js handles the routing for us based off the folder structure and the file naming.
 // But you can access the router to do programmatic routing and you do that be getting the useRouter from next router

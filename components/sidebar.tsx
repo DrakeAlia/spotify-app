@@ -6,7 +6,6 @@ import {
   ListItem,
   ListIcon,
   Divider,
-  // Center,
   LinkBox,
   LinkOverlay,
 } from '@chakra-ui/layout'
@@ -20,7 +19,7 @@ import {
 import { usePlaylist } from '../lib/hooks'
 
 // LinkOverlay and LinkBox allows us to make a click target which is bascially a word but have a bigger surface which is the size of a whole link item
-// This component renders everything inside the Sidebar container
+// This component renders the sidebar and everything inside the Sidebar container(playlists, menus, etc.)
 
 // Make some data and create the menus and then we can map over these menus and just write one component
 // And our menus will be arrays
@@ -79,6 +78,7 @@ const Sidebar = () => {
           {/* Put logo into the public folder on the root of the project */}
           <NextImage src="/logo.svg" height={60} width={120} />
         </Box>
+        {/* First list of menus */}
         {/* Nav Menu Container */}
         <Box marginBottom="20px">
           {/* List spacing keeps items spaced from each other */}
@@ -106,7 +106,7 @@ const Sidebar = () => {
           </List>
         </Box>
         {/* Music Menu Container */}
-        <Box marginTop="20px">
+        <Box marginTop="30px">
           <List spacing={2}>
             {musicMenu.map((menu) => (
               <ListItem paddingX="20px" fontSize="16px" key={menu.name}>
@@ -126,8 +126,9 @@ const Sidebar = () => {
             ))}
           </List>
         </Box>
-        {/* This will put a space between our sections of menus  */}
-        <Divider color="gray.800" />
+        {/* This will put a space between our sections of menus and playlist  */}
+        <Divider marginTop="12px" color="gray.800" />
+        {/* Second list of menus */}
         {/* Playlist Container */}
         {/* overflowY="auto" - is going to allow scrolling in the sidebar */}
         <Box height="66%" overflowY="auto" paddingY="20px">

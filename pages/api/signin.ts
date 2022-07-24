@@ -26,9 +26,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         expiresIn: '8h',
       }
     )
-
+    // Setting a cookie on the server side in http response
     res.setHeader(
       'Set-Cookie',
+      // serialize wants to know the name of the cookie
       cookie.serialize('TRAX_ACCESS_TOKEN', token, {
         // No js running in the broswer will be able to read this cookie at all
         httpOnly: true,
