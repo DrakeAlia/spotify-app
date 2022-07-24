@@ -46,10 +46,16 @@ const run = async () => {
     })
   )
 
+  // Create user, we need a password but we're gonna hash the password before we do that and in order to do that we're gonna generate a salt
+  // Encryption is like a reversible, it's like if you could make food but also undo it but the only way you could do it is if you knew the special key to the oven and salt is a specific ingredient that makes the food taste a certain way and you need that ingredient in there or otherwise, it won't taste a certain way
   const salt = bcrypt.genSaltSync()
+  // Make a user which goung to be await = prisma.user.upsert
   const user = await prisma.user.upsert({
+    // find the user where we go by email
     where: { email: 'user@test.com' },
+    // if you find that user, do an update of nothing because we don't want to update this user if you find them
     update: {},
+    // But we do want to create them if they don't exist
     create: {
       email: 'user@test.com',
       password: bcrypt.hashSync('password', salt),
