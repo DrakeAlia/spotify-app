@@ -4,7 +4,7 @@ import cookie from 'cookie'
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../lib/prisma'
 
-// This is where the user signs up... creating a cookie for that user
+// This is where the user signs up... creating a cookie for that user after successfully signing up
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const salt = bcrypt.genSaltSync()
