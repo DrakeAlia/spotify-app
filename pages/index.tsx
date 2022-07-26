@@ -59,3 +59,15 @@ export const getServerSideProps = async () => {
 }
 
 export default Home
+
+// // fetch request to prisma logout
+// fetch('/prisma/logout', {
+//   // posting the data to the server
+//   method: 'post',
+//   // set some headers - content type header, the server knows it's json data
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+//   // the body of request itself is going to be json.stringify and pass up an empty object
+//   body: JSON.stringify({}),
+// })

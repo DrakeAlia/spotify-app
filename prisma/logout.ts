@@ -27,15 +27,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         expiresIn: '8h',
       }
     )
+    // Logging out steps:
+    // 1. Set the value of the cookie to an empty string
+    // 2. Get rid of maxAge
+
     // Setting a cookie on the server side in http response
     res.setHeader(
       'Set-Cookie',
       // serialize wants to know the name of the cookie
-      cookie.serialize('TRAX_ACCESS_TOKEN', token, {
+      cookie.serialize('', token, {
         // No js running in the broswer will be able to read this cookie at all
         httpOnly: true,
-        // How long does this cookie lasts for
-        maxAge: 8 * 60 * 60,
+        // This means 0 seconds start date bascially this cookie expired in 1970 so when the browser picks that up it's going to delete it
+        expires: new Date(0),
         // What path this cookie will be available on
         path: '/',
         // sameSite controls which sites have access to this cookie
@@ -44,10 +48,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         secure: process.env.NODE_ENV === 'production',
       })
     )
-
-    res.json(user)
-  } else {
-    res.status(401)
-    res.json({ error: 'Email or Password is incorrect' })
+    // Success status response that the request has succeeded
+    res.statusCode = 200
+    // Sends a JSON response composed of the specified data
+    res.json({ success: true })
   }
 }
