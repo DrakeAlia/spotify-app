@@ -18,6 +18,14 @@ To Do:
 
 -Make the artist card clickable so I can see the artist's songs ()
 
+Cookie
+1. Set the httpOnly value true (X)
+2. Remove that code for removing cookie
+3. Tell the server the cookie is no longer valid
+4. Tell prisma to either delete or expire the cookie
+5. Copy the route for signin or signup for logout file
+
+
 --------------------------------------------------------------------------------------------
 Prisma steps for database and migrations:
 

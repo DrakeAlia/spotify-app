@@ -51,9 +51,9 @@ const run = async () => {
   const salt = bcrypt.genSaltSync()
   // Make a user which goung to be await = prisma.user.upsert
   const user = await prisma.user.upsert({
-    // find the user where we go by email
+    // Find the user where we go by email
     where: { email: 'user@test.com' },
-    // if you find that user, do an update of nothing because we don't want to update this user if you find them
+    // If you find that user, do an update of nothing because we don't want to update this user if you find them
     update: {},
     // But we do want to create them if they don't exist
     create: {
@@ -65,6 +65,7 @@ const run = async () => {
   })
 
   const songs = await prisma.song.findMany({})
+  // We want all the songs,
   await Promise.all(
     new Array(10).fill(1).map(async (_, i) => {
       return prisma.playlist.create({
