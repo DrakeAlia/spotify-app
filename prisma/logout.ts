@@ -29,7 +29,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     )
     // Logging out steps:
     // 1. Set the value of the cookie to an empty string
-    // 2. Get rid of maxAge
+    // 2. Get rid of maxAge and replace with expires
 
     // Setting a cookie on the server side in http response
     res.setHeader(
@@ -44,10 +44,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         path: '/',
         // sameSite controls which sites have access to this cookie
         sameSite: 'lax',
-        // Only send this cookie over https connection
+        // Only send this cookie over a https connection
         secure: process.env.NODE_ENV === 'production',
       })
     )
+    console.log('test')
     // Success status response that the request has succeeded
     res.statusCode = 200
     // Sends a JSON response composed of the specified data

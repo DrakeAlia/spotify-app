@@ -20,7 +20,13 @@ const Home = ({ artists }) => {
       // image="https://media-exp2.licdn.com/dms/image/C5603AQGL5eIcDgi8Rw/profile-displayphoto-shrink_800_800/0/1579064270982?e=1663200000&v=beta&t=IdwwEW4DTIF8Sv3ypT93Ll5Y28C_icvCgsr7l2tj9f0"
     >
       <Box color="white" paddingX="40px">
-        <Button bg="green.500" type="submit" onClick={() => {}}>
+        <Button
+          bg="green.500"
+          type="submit"
+          onClick={() => {
+            console.log('Logout Clicked')
+          }}
+        >
           Logout
         </Button>
         <Box marginBottom="40px">
