@@ -50,3 +50,6 @@ npx prisma db seed
 
 To check the db live:
 npx prisma studio
+
+
+http POST :3000/api/signup email=h@h.com password=abcabc

@@ -65,6 +65,18 @@ const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
             >
               {mode}
             </Button>
+            <Button
+              type="submit"
+              bg="green.500"
+              isLoading={isLoading}
+              sx={{
+                '&:hover': {
+                  bg: 'green.300',
+                },
+              }}
+            >
+              {mode}
+            </Button>
           </form>
         </Box>
       </Flex>

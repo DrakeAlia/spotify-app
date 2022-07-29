@@ -13,13 +13,13 @@ import prisma from '../../lib/prisma'
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   // You send us some credentials(email and password)
   // We're going to attempt to create a new user with that email and a hashed password
-  // Because emails are unique its either gonna create you because you don't exist or it's gonna say sorry this email already exist and it's gonna throw an error(That's all sign up is gonna do)
+  // Because emails are unique its either gonna create you because you don't exist or it's gonna say sorry this  already exist and it's gonna throw an error(That's all sign up is gonna do)
   // And then if that is successful, we'll generate a JSON Web Token and we'll save it as a cookie, so it'll be set in your browser
   // And then that cookie will be sent on every other requests that we can use to verify that is you(That is how we gonna sign you up)
 
   // create user
   const salt = bcrypt.genSaltSync()
-  // Get the email and password(backend: making the function saying if you want to sign in, you must pass the email and password up - req.body)
+  // Get the  and password(backend: making the function saying if you want to sign in, you must pass the email and password up - req.body)
   const { email, password } = req.body
 
   let user
