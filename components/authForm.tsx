@@ -1,7 +1,7 @@
 import { Box, Flex, Input, Button } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { FC, useState } from 'react'
-import { useSWRConfig } from 'swr'
+// import { useSWRConfig } from 'swr'
 import NextImage from 'next/image'
 import { auth } from '../lib/mutations'
 
@@ -66,16 +66,13 @@ const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
               {mode}
             </Button>
             <Button
-              type="submit"
               bg="green.500"
-              isLoading={isLoading}
-              sx={{
-                '&:hover': {
-                  bg: 'green.300',
-                },
+              type="submit"
+              onClick={() => {
+                console.log('Sign up was clicked')
               }}
             >
-              {mode}
+              signup
             </Button>
           </form>
         </Box>
