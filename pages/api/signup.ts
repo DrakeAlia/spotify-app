@@ -20,6 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   // create user
   const salt = bcrypt.genSaltSync()
   // Get the  and password(backend: making the function saying if you want to sign in, you must pass the email and password up - req.body)
+  console.log('hello signup')
   const { email, password } = req.body
 
   let user

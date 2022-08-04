@@ -13,6 +13,7 @@ import prisma from '../../lib/prisma'
 // These functions here are handlers(its a function that takes a request and a response)
 // typecheck the req and res
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  console.log('hello signin')
   // You must send me an email and password on the body
   const { email, password } = req.body
 
