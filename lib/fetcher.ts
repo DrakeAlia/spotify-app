@@ -9,12 +9,18 @@ export default function fetcher(url: string, data = undefined) {
   // fetch is the new mechanism to interact with APIs and Http calls
   // When you deploy your nextjs app, your API it's mounted on the same domain as your front end app
   // We can get that by using the window object - bascially whenever the domain is that you're on when you deploy this to some plantform
+  // api{url} - whatever URL that you pass us
   return fetch(`${window.location.origin}/api${url}`, {
+    // the first option is the method, so if you pass some data that means you're probably trying to do a post request
+    // otherwise you're doing a get request
     method: data ? 'POST' : 'GET',
+    // this ensures that we send the cookies up for the JSON web token
     credentials: 'include',
+    // fetch is not JSON first, so you must instruct fetch that you are doing JSON
     headers: {
       'Content-Type': 'application/json',
     },
+    // last thing is the body(that's why we made data undefined because it won't break if it's undefined)
     body: JSON.stringify(data),
   }).then((res) => {
     if (res.status > 399 && res.status < 200) {

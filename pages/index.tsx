@@ -27,9 +27,18 @@ const Home = ({ artists }) => {
             console.log('Logout Clicked')
             fetch('/api/logout', {
               method: 'post',
+              // HTTP header that is used to indicate the media type of the
+              // resource and in the case of responses, it tells the browser
+              // about what actually content type of the returned content is.
+              // In case of any POST or PUT requests, the client tells
+              // the server about the kind of data sent.
               headers: {
                 'Content-Type': 'application/json',
               },
+              // While developing an application using JavaScript, many times it is
+              // needed to serialize the data to strings for storing the data into
+              // a database or for sending the data to an API or web server. The
+              // data has to be in the form of strings.
               body: JSON.stringify({}),
             })
           }}
