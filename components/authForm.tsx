@@ -14,6 +14,8 @@ import { auth } from '../lib/mutations'
 
 // FC(Function Component) will type check over the props for you
 
+// This auth form will take in a mode, which will be a string of signin or signup
+// set up state to keep track of in this form(email, password, if we're loading or not) 
 const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -30,6 +32,7 @@ const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
     router.push('/')
   }
 
+  // JSX for styling our box(div)
   return (
     <Box height="100vh" width="100vw" bg="black" color="white">
       <Flex

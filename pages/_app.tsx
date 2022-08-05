@@ -53,6 +53,10 @@ const MyApp = ({ Component, pageProps }) => {
   // Wrap our component inside the ChakraProvider and pass the theme which is called theme
   // Wrap the component with Playerlayout not the ChakraProvider, we want to stay in the ChakraProvider
   // otherwise our layout would have access to any of our theme primitives
+
+  // Component.authPage - is asking if this a authPage component, if so then we only want to put the component in here
+  // (if this a component with authPage property DO NOT wrap it in the layout)
+  // if it's not then we still want to wrap our component inside of a layout(if it doesn't have the authPage property, it should be protected, it should have the playerlayout)
   return (
     <ChakraProvider theme={theme}>
       <StoreProvider store={store}>
