@@ -15,7 +15,7 @@ import { auth } from '../lib/mutations'
 // FC(Function Component) will type check over the props for you
 
 // This auth form will take in a mode, which will be a string of signin or signup
-// set up state to keep track of in this form(email, password, if we're loading or not) 
+// set up state to keep track of in this form(email, password, if we're loading or not)
 const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -27,13 +27,17 @@ const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
     e.preventDefault()
     setIsLoading(true)
 
+    // Make the API call
+    // Auth method - takes in a mode and takes in a body(email, password)
     await auth(mode, { email, password })
     setIsLoading(false)
+    // navigate us to the home page
     router.push('/')
   }
 
-  // JSX for styling our box(div)
+  // (JSX) for styling our box(div)
   return (
+    // container layout
     <Box height="100vh" width="100vw" bg="black" color="white">
       <Flex
         justify="center"
@@ -41,21 +45,26 @@ const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
         height="100px"
         borderBottom="white 1px solid"
       >
+        {/* logo */}
         <NextImage src="/logo.svg" height={60} width={120} />
       </Flex>
+      {/* auth form fields container */}
       <Flex justify="center" align="center" height="calc(100vh - 100px)">
         <Box padding="50px" bg="gray.900" borderRadius="6px">
           <form onSubmit={handleSubmit}>
+            {/* email field for auth form */}
             <Input
               placeholder="email"
               type="email"
               onChange={(e) => setEmail(e.target.value)}
             />
+            {/* password field for auth form */}
             <Input
               placeholder="password"
               type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
+            {/* submit button on auth form (sigin or signup) */}
             <Button
               type="submit"
               bg="green.500"
@@ -66,6 +75,7 @@ const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
                 },
               }}
             >
+              {/* mode: either sign in or sign up */}
               {mode}
             </Button>
             <Button
