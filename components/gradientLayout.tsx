@@ -24,9 +24,9 @@ const GradientLayout = ({
       // Our gradient gets darker as it moves down to the bottom(until it fades to black - rgba)
       bgGradient={`linear(${color}.500 0%, ${color}.600 15%, ${color}.700 40%, rgba(0,0,0,0.95) 75%)`}
     >
+      {/* profile image container */}
       <Flex bg={`${color}.600`} padding="40px" align="end">
         <Box padding="20px">
-          {/* profile image */}
           <Image
             boxSize="160px"
             boxShadow="2xl"
@@ -34,7 +34,9 @@ const GradientLayout = ({
             borderRadius={roundImage ? '100%' : '3px'}
           />
         </Box>
+        {/* profile text/content container */}
         <Box padding="20px" lineHeight="40px" color="white">
+          {/* text component abstracts away from having to ever use h1-h6, p tags, or span tags */}
           <Text fontSize="x-small" fontWeight="bold" casing="uppercase">
             {subtitle}
           </Text>
