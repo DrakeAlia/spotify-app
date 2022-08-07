@@ -1,6 +1,6 @@
 import AuthForm from '../components/authForm'
 
-// This route is simple because AuthForm is doing the heavylifting 
+// This route is simple because AuthForm is doing the heavylifting
 
 const Signin = () => {
   return <AuthForm mode="signin" />
