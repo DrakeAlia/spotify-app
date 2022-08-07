@@ -4,8 +4,12 @@ import GradientLayout from '../components/gradientLayout'
 import { useMe } from '../lib/hooks'
 import prisma from '../lib/prisma'
 
+// library prisma - we only have once instance of prisma
+// (one connection to the db instead of multiple connections we would have to make on the client every single time)
+
 // This component renders out the user's profile (their name, public playlists) and their top artists of the month
 
+// access to artists
 const Home = ({ artists }) => {
   const { user } = useMe()
 
@@ -73,12 +77,30 @@ const Home = ({ artists }) => {
   )
 }
 
+// This function will get the props that will inject into this homepage,
+// so whatever props you return in this function will be injected into the homepage because this
+// function is going to be ran on the server side,
+// Bascially this function will only run when someone requests this page,
+// it's going to be ran everytime they request a page but only when they request a page
+// on the server and NOT on the client
 export const getServerSideProps = async () => {
+  // get the artists
+  // findMany({}) - get all the artists
   const artists = await prisma.artist.findMany({})
   // console.log(artists)
+  // return an object that has a props property on it
   return {
+    // whatever props we pass in here is what's going to get injected into the homepage
     props: { artists },
   }
 }
 
 export default Home
+
+// Any dependencies that we use inside to getServerSideProps also gets stripped out of
+// the dependency graph does not get bundled with the client
+// When we import prisma, that doesn't mean prisma is going to be on the client that's going to be stripped out too
+
+// What's the difference between getStaticProps and getServerSideProps?
+// getStaticProps is another function that's also ran at a non client time except it's ran at build time. It's only going to excute when you do a static build of your site
+// getServerSideProps is ran at runtime on the server. It excutes every single time you request, in this example this homepage

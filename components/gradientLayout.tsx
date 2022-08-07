@@ -50,3 +50,21 @@ const GradientLayout = ({
 }
 
 export default GradientLayout
+
+// What are some of things that we would have to do put the artists
+// on this page? What would we have to make as far as the back end?
+
+// Make a hook so the client side can retrieve the artists - meaning the client side needs to make an API call somewhere(make an API route)
+// GET artists on the API
+
+// We don't need to do both of these things - so we had to make a client side call to get the playlist for the sidebar but for a page
+// we could get the data server side before it renders
+
+// Is the data on here going to be changing while the user is
+// looking at it? If so then you want to do the client side
+
+// Or is the data on this page always going to stay the same after
+// the initial render? If so then you want to do the server side
+
+// Let's try the server side way(which means we won't need the
+// hooks or the API route)
