@@ -9,6 +9,7 @@ import prisma from '../lib/prisma'
 const Home = ({ artists }) => {
   const { user } = useMe()
 
+  // GradientLayout - fills out the styling, user info, user's image, and their playlist inside the home page
   return (
     <GradientLayout
       roundImage
