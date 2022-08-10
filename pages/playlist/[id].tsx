@@ -5,6 +5,7 @@ import prisma from '../../lib/prisma'
 
 // This route is for the playlist pages(a route that has a index in it) and displays there individual
 
+// this function takes in a playlist id and creates random colors for different pages for the playlist
 const getBGColor = (id) => {
   const colors = [
     'red',
@@ -16,7 +17,9 @@ const getBGColor = (id) => {
     'teal',
     'yellow',
   ]
-
+  // minus 1 because no ID starts with 0 but the array starts with 0(Ex: we'll never see red in this case unless we do minus 1)
+  // or if the ID is greater than anything in here and this is where the randomness comes in
+  // Just give us a random color if the ID doesn't exist(a deterministic color for our playlists)
   return colors[id - 1] || colors[Math.floor(Math.random()) * colors.length]
 }
 
@@ -25,6 +28,7 @@ const getBGColor = (id) => {
 const Playlist = ({ playlist }) => {
   const color = getBGColor(playlist.id)
 
+  // playlist content info - client side
   return (
     <GradientLayout
       color={color}
