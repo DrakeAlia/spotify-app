@@ -13,6 +13,7 @@ import prisma from '../../lib/prisma'
 // The validateRoute wraps our handler and won't call thishandler unless you've authticated
 // This function never runs unless it's guaranteed to know that you've been validated
 export default validateRoute(async (req, res, user) => {
+  // get the playlist count - return the count
   const playlistsCount = await prisma.playlist.count({
     where: {
       userId: user.id,

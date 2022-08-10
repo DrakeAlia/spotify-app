@@ -62,7 +62,10 @@ export const validateRoute = (handler) => {
   }
 }
 
+// This helper function will bascially just validate
+// verfiy a token and give us back an id (takes in a token)
 export const validateToken = (token) => {
+  // get a user back from jwt.verify(verify takes in a token and then the passphrase(hello))
   const user = jwt.verify(token, 'hello')
   return user
 }

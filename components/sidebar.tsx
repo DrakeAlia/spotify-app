@@ -146,6 +146,7 @@ const Sidebar = () => {
                   {/* When you click on a playlist, it'll take you to that playlist's id route  */}
                   <NextLink
                     href={{
+                      // when someone click on a playlist, it's going to go on this route
                       pathname: '/playlist/[id]',
                       query: { id: playlist.id },
                     }}

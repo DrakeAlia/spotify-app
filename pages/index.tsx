@@ -11,6 +11,7 @@ import prisma from '../lib/prisma'
 
 // access to artists
 const Home = ({ artists }) => {
+  // useMe hook
   const { user } = useMe()
 
   // GradientLayout - fills out the styling, user info, user's image, and their playlist inside the home page
@@ -50,6 +51,7 @@ const Home = ({ artists }) => {
         >
           Logout
         </Button>
+        {/* artists content container */}
         <Box marginBottom="40px">
           <Text fontSize="2xl" fontWeight="bold">
             Top artist this month
@@ -57,13 +59,16 @@ const Home = ({ artists }) => {
           <Text fontSize="md">only visiable to you</Text>
         </Box>
         <Flex>
+          {/* artist container/cards */}
           {artists.map((artist) => (
             <Box paddingX="10px" width="20%">
               <Box bg="gray.900" borderRadius="4px" padding="15px" width="100%">
+                {/* artists card imgs(cats) */}
                 <Image
                   src="https://placekitten.com/300/300"
                   borderRadius="100%"
                 />
+                {/* artist's card content container */}
                 <Box marginTop="20px">
                   <Text fontSize="large">{artist.name}</Text>
                   <Text fontSize="x-small">Artist</Text>
