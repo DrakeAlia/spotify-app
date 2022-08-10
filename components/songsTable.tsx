@@ -48,20 +48,28 @@ const SongTable = ({ songs }) => {
             </Tr>
           </Thead>
           <Tbody>
+            {/* table row */}
             {songs.map((song, i) => (
               <Tr
+                // table highlights when you hover over it
+                // sx - lets you add custom styles
                 sx={{
                   transition: 'all .3s',
+                  // and on hover -  the bg to be slightly lighter then what it is now
                   '&:hover': {
                     bg: 'rgba(225, 225, 255, 0.1)',
                   },
                 }}
+                // because this is a map, we need a key property
                 key={song.id}
                 cursor="pointer"
                 onClick={() => handlePlay(song)}
               >
+                {/* Td which each single coloumn, we're going to add the theme for the song */}
+                {/* The first one will be the number(the index) and adding plus 1 everything because it starts with 0 */}
                 <Td>{i + 1}</Td>
                 <Td>{song.name}</Td>
+                {/* format for time/day ago */}
                 <Td>{formatDate(song.createdAt)}</Td>
                 <Td>{formatTime(song.duration)}</Td>
               </Tr>

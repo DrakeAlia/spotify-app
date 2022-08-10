@@ -20,7 +20,7 @@ const getBGColor = (id) => {
   // minus 1 because no ID starts with 0 but the array starts with 0(Ex: we'll never see red in this case unless we do minus 1)
   // or if the ID is greater than anything in here and this is where the randomness comes in
   // Just give us a random color if the ID doesn't exist(a deterministic color for our playlists)
-  return colors[id - 1] || colors[Math.floor(Math.random()) * colors.length]
+  return colors[id - 1] || colors[Math.floor(Math.random() * colors.length)]
 }
 
 // When we go to /playlist/some id, it renders this page
@@ -38,6 +38,7 @@ const Playlist = ({ playlist }) => {
       description={`${playlist.songs.length} songs`}
       image={`https://picsum.photos/400?random=${playlist.id}`}
     >
+      {/* pass in our songs from songsTable */}
       <SongTable songs={playlist.songs} />
     </GradientLayout>
   )
