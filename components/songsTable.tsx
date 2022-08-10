@@ -5,6 +5,8 @@ import { AiOutlineClockCircle } from 'react-icons/ai'
 import { useStoreActions } from 'easy-peasy'
 import { formatDate, formatTime } from '../lib/formatters'
 
+// This component displays the songs/list of songs which we will bring into the playlist page
+
 const SongTable = ({ songs }) => {
   const playSongs = useStoreActions((store: any) => store.changeActiveSongs)
   const setActiveSong = useStoreActions((store: any) => store.changeActiveSong)
@@ -13,10 +15,12 @@ const SongTable = ({ songs }) => {
     setActiveSong(activeSong || songs[0])
     playSongs(songs)
   }
+  // container for the song table layout
   return (
     <Box bg="transparent" color="white">
       <Box padding="10px" marginBottom="20px">
         <Box marginBottom="30px">
+          {/* click on play button */}
           <IconButton
             icon={<BsFillPlayFill fontSize="30px" />}
             aria-label="play"
@@ -26,7 +30,9 @@ const SongTable = ({ songs }) => {
             onClick={() => handlePlay()}
           />
         </Box>
+        {/* table container */}
         <Table variant="unstyled">
+          {/* labels at the top of the table */}
           <Thead
             borderBottom="1px solid"
             borderColor="rgba(255, 255,255, 0.2 )"
@@ -35,6 +41,7 @@ const SongTable = ({ songs }) => {
               <Th>#</Th>
               <Th>Title</Th>
               <Th>Date Added</Th>
+              {/* clock icon */}
               <Th>
                 <AiOutlineClockCircle />
               </Th>
