@@ -23,6 +23,10 @@ import {
 import { useStoreActions } from 'easy-peasy'
 import { formatTime } from '../lib/formatters'
 
+// A React.js wrapper for howler.js (audio player). ReactHowler has no UI, 
+// you have to provide your own UI. Props can be passed to control 
+// playback and react to events such as end, load, play, ...
+
 // This component handles the functionality of the player bar
 
 const Player = ({ songs, activeSong }) => {
@@ -114,6 +118,7 @@ const Player = ({ songs, activeSong }) => {
     soundRef.current.seek(e[0])
   }
 
+  // container for everything where the controls are held in
   return (
     <Box>
       <Box>
