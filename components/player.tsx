@@ -29,15 +29,23 @@ import { formatTime } from '../lib/formatters'
 
 // This component handles the functionality of the player bar
 
+// takes a list of songs(playlist) and also takes an active song
 const Player = ({ songs, activeSong }) => {
+  // keep track of wheather you're playing or not, which is going to default to true so when this
+  // component loads up, its automatically going to start playing
   const [playing, setPlaying] = useState(true)
+  // keep track of what song is currently playing in the list of songs that we got
   const [index, setIndex] = useState(
     songs.findIndex((s) => s.id === activeSong.id)
   )
+  // keep track of seek if you are seeking or not(the ablility to grab the thumb and seek) and defaulting at zero
   const [seek, setSeek] = useState(0.0)
   const [isSeeking, setIsSeeking] = useState(false)
+  // keep track if we're repeating or not, by default we will not be repeating
   const [repeat, setRepeat] = useState(false)
+  // same thing for shuffle
   const [shuffle, setShuffle] = useState(false)
+  // keep track of the duration of a song
   const [duration, setDuration] = useState(0.0)
   const repeatRef = useRef(repeat)
   const soundRef = useRef(null)
@@ -67,11 +75,13 @@ const Player = ({ songs, activeSong }) => {
     repeatRef.current = repeat
   }, [repeat])
 
+  // this function sets the toggle for playing or not(whatever the value is)
   const setPlayState = (value) => {
     setPlaying(value)
   }
 
   const onShuffle = () => {
+    // give us the current state and give us the not state of that
     setShuffle((state) => !state)
   }
 
@@ -123,7 +133,9 @@ const Player = ({ songs, activeSong }) => {
     <Box>
       <Box>
         <ReactHowler
+          // pass whether it's playing or not
           playing={playing}
+          // if we have the song url
           src={activeSong?.url}
           ref={soundRef}
           onLoad={onLoad}
@@ -137,7 +149,9 @@ const Player = ({ songs, activeSong }) => {
             variant="link"
             aria-label="shuffle"
             fontSize="24px"
+            // if it's shuffle it's true then make it white otherwise it'll be gray
             color={shuffle ? 'white' : 'gray.600'}
+            // toggle wheather or not you're shuffling
             onClick={onShuffle}
             icon={<MdShuffle />}
           />
@@ -149,6 +163,7 @@ const Player = ({ songs, activeSong }) => {
             icon={<MdSkipPrevious />}
             onClick={prevSong}
           />
+          {/* if playing is true, then we want to show the pause button */}
           {playing ? (
             <IconButton
               outline="none"
@@ -160,6 +175,7 @@ const Player = ({ songs, activeSong }) => {
               onClick={() => setPlayState(false)}
             />
           ) : (
+            // if not playing, then we want to show the play button
             <IconButton
               outline="none"
               variant="link"
@@ -183,7 +199,9 @@ const Player = ({ songs, activeSong }) => {
             variant="link"
             aria-label="repeat"
             fontSize="24px"
+            // if it's repeat it's true then make it white otherwise it'll be gray
             color={repeat ? 'white' : 'gray.600'}
+            // toggle wheather or not you're repeating
             onClick={onRepeat}
             icon={<MdOutlineRepeat />}
           />
