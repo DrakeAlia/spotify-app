@@ -56,7 +56,11 @@ const MyApp = ({ Component, pageProps }) => {
 
   // Component.authPage - is asking if this a authPage component, if so then we only want to put the component in here
   // (if this a component with authPage property DO NOT wrap it in the layout)
-  // if it's not then we still want to wrap our component inside of a layout(if it doesn't have the authPage property, it should be protected, it should have the playerlayout)
+  // if it's not then we still want to wrap our component inside of a layout(if it doesn't have the authPage property, 
+  // it should be protected, it should have the playerlayout)
+
+  // StoreProvider - everything after ChakraProvider is going to get wrapped at the StoreProvider
+  // It's only prop it's going to take in the store that we just created
   return (
     <ChakraProvider theme={theme}>
       <StoreProvider store={store}>

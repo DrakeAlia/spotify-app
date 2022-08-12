@@ -2,6 +2,8 @@ import { Box, Flex, Text } from '@chakra-ui/layout'
 import { useStoreState } from 'easy-peasy'
 import Player from './player'
 
+// This component is the styling for the player bar container
+
 const PlayerBar = () => {
   const songs = useStoreState((state: any) => state.activeSongs)
   const activeSong = useStoreState((state: any) => state.activeSong)
@@ -15,6 +17,7 @@ const PlayerBar = () => {
             <Text fontSize="small">{activeSong.artist.name}</Text>
           </Box>
         ) : null}
+        {/* player controls container */}
         <Box width="40%">
           {activeSong ? <Player songs={songs} activeSong={activeSong} /> : null}
         </Box>

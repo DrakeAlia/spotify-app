@@ -23,6 +23,8 @@ import {
 import { useStoreActions } from 'easy-peasy'
 import { formatTime } from '../lib/formatters'
 
+// This component handles the functionality of the player bar
+
 const Player = ({ songs, activeSong }) => {
   const [playing, setPlaying] = useState(true)
   const [index, setIndex] = useState(

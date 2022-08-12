@@ -47,10 +47,12 @@ const Playlist = ({ playlist }) => {
 export const getServerSideProps = async ({ query, req }) => {
   let user
 
+  // this will handle error if valid token error is out
   try {
     user = validateToken(req.cookies.TRAX_ACCESS_TOKEN)
   } catch (e) {
     return {
+      // you don't have a token, redirect to signin page
       redirect: {
         permanent: false,
         destination: '/signin',
