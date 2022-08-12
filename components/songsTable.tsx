@@ -8,11 +8,20 @@ import { formatDate, formatTime } from '../lib/formatters'
 // This component displays the songs/list of songs which we will bring into the playlist page
 
 const SongTable = ({ songs }) => {
+  // setting active songs
   const playSongs = useStoreActions((store: any) => store.changeActiveSongs)
+  // setting active song
   const setActiveSong = useStoreActions((store: any) => store.changeActiveSong)
 
+  // This function handles when you click the play button or
+  // you click a song its going to run the handlePlay function
+  // it's going to set the active song and the active songs, so the playlist
+  // Optional if you pass an active song or not
   const handlePlay = (activeSong?) => {
+    // set the active song so whatever song you passed in if you did
+    // if you did not, we're going to set it to the songs that we get in our props, zero
     setActiveSong(activeSong || songs[0])
+    // set the active songs to all songs(the entire playlist)
     playSongs(songs)
   }
   // container for the song table layout
