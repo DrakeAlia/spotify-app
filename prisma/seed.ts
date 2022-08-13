@@ -74,6 +74,17 @@ const run = async () => {
     },
   })
 
+  const createMany = await prisma.user.createMany({
+    data: [
+      { name: 'Bob', email: 'bob@prisma.io' },
+      { name: 'Bobo', email: 'bob@prisma.io' }, // Duplicate unique key!
+      { name: 'Yewande', email: 'yewande@prisma.io' },
+      { name: 'Angelique', email: 'angelique@prisma.io' },
+    ],
+    skipDuplicates: true, // Skip 'Bobo'
+  })
+
+
   // Give the user a playlist and we want those playlist to have songs
   // This is saying, create 10 playlist whose names are playlist number that has a user whose id is this one,
   // connect those two together and then it has an array of songs whose values are an array of the song ids,
@@ -118,5 +129,5 @@ run()
     await prisma.$disconnect()
   })
 
-// npx prisma db seed - you decide when to invoke the seed command. It can be useful for a test setup or 
+// npx prisma db seed - you decide when to invoke the seed command. It can be useful for a test setup or
 // to prepare a new development environment, for example.

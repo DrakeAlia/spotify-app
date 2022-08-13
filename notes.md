@@ -2,7 +2,7 @@ To Do:
 
 -Log out button (X)
 
--Register button ()
+-Register button (X)
 
 -Rename the project ()
 
@@ -38,7 +38,7 @@ High level for what is going to the cookie:
 Questions:
 How can you see your route, to test if its working properly?
 
-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
 
 Prisma steps for database and migrations:
 
@@ -54,3 +54,10 @@ npx prisma studio
 
 
 http POST :3000/api/signup email=h@h.com password=abcabc
+
+------------------------------------------------------------------------------------------------------------------
+
+Where is the user being created in the server for this project?
+
+Seed.ts
+
