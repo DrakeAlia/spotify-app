@@ -48,6 +48,7 @@ const Player = ({ songs, activeSong }) => {
   // keep track of the duration of a song
   const [duration, setDuration] = useState(0.0)
   const repeatRef = useRef(repeat)
+  // We need to make a reference object using the use ref hook inside of react and attach that reference to the React.Howler
   const soundRef = useRef(null)
   const setActiveSong = useStoreActions((state: any) => state.changeActiveSong)
 
@@ -89,8 +90,11 @@ const Player = ({ songs, activeSong }) => {
     setRepeat((state) => !state)
   }
 
+  // We need the current index to set the next index we're going do a call back in this set call
   const prevSong = () => {
     setIndex((state) => {
+      // is the current index greater than 0? if it is, then subtract 1 from it
+      // if it is 0, then go back to the end of the playlist and play the song at the end, so it loops back over
       return state ? state - 1 : songs.length - 1
     })
   }
@@ -98,17 +102,23 @@ const Player = ({ songs, activeSong }) => {
   const nextSong = () => {
     setIndex((state) => {
       if (shuffle) {
+        // give us a random number between 0 and whatever the length of the array is
         const next = Math.floor(Math.random() * songs.length)
-
+        // if the next equals the current one then you need to do this again
         if (next === state) {
+          // call next song again
           return nextSong()
         }
+        // at the end return next
         return next
       }
+      // if state equals the last thing in the array, then we want to reset back to 0
+      // if not then return that index + 1, so just go up by 1
       return state === songs.length - 1 ? 0 : state + 1
     })
   }
 
+  // When a songs ends, it goes to the next song automatically
   const onEnd = () => {
     if (repeatRef.current) {
       setSeek(0)
@@ -128,7 +138,7 @@ const Player = ({ songs, activeSong }) => {
     soundRef.current.seek(e[0])
   }
 
-  // container for everything where the controls are held in
+  // container for everything where the controls are held in for the player
   return (
     <Box>
       <Box>
@@ -137,6 +147,7 @@ const Player = ({ songs, activeSong }) => {
           playing={playing}
           // if we have the song url
           src={activeSong?.url}
+          // access the native ReactHowler instance using the soundRef objects
           ref={soundRef}
           onLoad={onLoad}
           onEnd={onEnd}
@@ -161,6 +172,7 @@ const Player = ({ songs, activeSong }) => {
             aria-label="skip"
             fontSize="24px"
             icon={<MdSkipPrevious />}
+            // Go back to a previous song based off the list of songs that we had
             onClick={prevSong}
           />
           {/* if playing is true, then we want to show the pause button */}

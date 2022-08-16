@@ -36,6 +36,7 @@ const SongTable = ({ songs }) => {
             colorScheme="green"
             size="lg"
             isRound
+            // callback then call it without any arg
             onClick={() => handlePlay()}
           />
         </Box>
@@ -72,6 +73,8 @@ const SongTable = ({ songs }) => {
                 // because this is a map, we need a key property
                 key={song.id}
                 cursor="pointer"
+                // For each Tr we're going to add onClick with anoymous function here with handlePlay
+                // and pass in the current song that we're iterating over, so that means you clicked on a song
                 onClick={() => handlePlay(song)}
               >
                 {/* Td which each single coloumn, we're going to add the theme for the song */}

@@ -2,6 +2,9 @@ import { Box, Flex, Text } from '@chakra-ui/layout'
 import { useStoreState } from 'easy-peasy'
 import Player from './player'
 
+// useStoreState - we wanna get the states for the song and songs
+// we want to be able to toggle wheather or not we show the player controls
+
 // This component is the styling for the player bar container
 
 // get the state for the song and songs

@@ -4,7 +4,8 @@
 // Our db is on heroku and prisma just needs to know the URL for the database to connect to
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["createMany"]
 }
 
 // Shadow DB - We use another db called shadow db because when prisma does its migrations it does something called shadow db, where it makes another db

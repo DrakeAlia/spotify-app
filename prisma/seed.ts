@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
 import { artistsData } from './songsData'
+// import * as faker from 'faker'
 
 // This component allows to get some data in the db(specifically some playlists, etc. and populate our sidebar with some playlists,
 // we can do some authentication)
@@ -18,6 +19,13 @@ import { artistsData } from './songsData'
 
 // bcyrpt is a library that helps you hash passwords
 
+// const data = Array.from({ length: 100 }).map(() => ({
+//   firstName: faker.name.firstName(),
+//   lastName: faker.name.lastName(),
+//   email: faker.internet.email(),
+//   password: faker.password.password(),
+// }))
+
 // Prisma handles the db connection for us
 const prisma = new PrismaClient()
 
@@ -26,6 +34,10 @@ const prisma = new PrismaClient()
 // that belong to the user
 // That way we can log in with a user that already has playlists, that already has songs in it, that belong to an artist
 const run = async () => {
+  await prisma.user.createMany({
+    data,
+  })
+
   // Promise.all - Takes an iterable of promises as an input, and returns a single Promise that resolves to an array of the
   // results of the input promises.
   await Promise.all(
@@ -74,16 +86,15 @@ const run = async () => {
     },
   })
 
-  const createMany = await prisma.user.createMany({
-    data: [
-      { name: 'Bob', email: 'bob@prisma.io' },
-      { name: 'Bobo', email: 'bob@prisma.io' }, // Duplicate unique key!
-      { name: 'Yewande', email: 'yewande@prisma.io' },
-      { name: 'Angelique', email: 'angelique@prisma.io' },
-    ],
-    skipDuplicates: true, // Skip 'Bobo'
-  })
-
+  // const createMany = await prisma.user.createMany({
+  //   data: [
+  //     { name: 'Bob', email: 'bob@prisma.io' },
+  //     { name: 'Bobo', email: 'bob@prisma.io' }, // Duplicate unique key!
+  //     { name: 'Yewande', email: 'yewande@prisma.io' },
+  //     { name: 'Angelique', email: 'angelique@prisma.io' },
+  //   ],
+  //   skipDuplicates: true, // Skip 'Bobo'
+  // })
 
   // Give the user a playlist and we want those playlist to have songs
   // This is saying, create 10 playlist whose names are playlist number that has a user whose id is this one,
