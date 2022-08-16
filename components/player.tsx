@@ -40,6 +40,7 @@ const Player = ({ songs, activeSong }) => {
   )
   // keep track of seek if you are seeking or not(the ablility to grab the thumb and seek) and defaulting at zero
   const [seek, setSeek] = useState(0.0)
+  // keeps track of someone is seeking or not
   const [isSeeking, setIsSeeking] = useState(false)
   // keep track if we're repeating or not, by default we will not be repeating
   const [repeat, setRepeat] = useState(false)
@@ -120,21 +121,33 @@ const Player = ({ songs, activeSong }) => {
 
   // When a songs ends, it goes to the next song automatically
   const onEnd = () => {
+    // if repeat is activated
     if (repeatRef.current) {
+      // tell ReactHowler to seek back to 0 so reset the song
       setSeek(0)
+      // Give us the current value of this reference, only when repeat is activated
       soundRef.current.seek(0)
+      // if repeat is not activated then just go to next song
     } else {
+      // so call the nextSong function
       nextSong()
     }
   }
-
+  // When a song loads up, we need to grab the duration from it and set the duration
+  // so we can show it in the player bar at the bottom right
   const onLoad = () => {
+    // if call duration it'll give you back the current duration of the song that kust loaded up
     const songDuration = soundRef.current.duration()
+    // update the duration on the bottom right of the seek bar
     setDuration(songDuration)
   }
 
+  // if you click the seek bar or drag the seek bar
   const onSeek = (e) => {
+    // paresFlaot because we are doing decimals on the seek value because they step by point one every time
+    // get e and get the first value out of there
     setSeek(parseFloat(e[0]))
+    // pass this value to seek that value
     soundRef.current.seek(e[0])
   }
 
@@ -234,9 +247,14 @@ const Player = ({ songs, activeSong }) => {
               step={0.1}
               min={0}
               id="player-range"
+              // max value for how big it's going to be, if there is a durartion set it toFixedvfor
+              // getting the right amount of decimal places for this number, if not then 0
               max={duration ? (duration.toFixed(2) as unknown as number) : 0}
+              // when someone clicks on the seek bar and it tracks
               onChange={onSeek}
+              // whatever the value thats going to be an array which is seek
               value={[seek]}
+              // if someone is currently seek or not
               onChangeStart={() => setIsSeeking(true)}
               onChangeEnd={() => setIsSeeking(false)}
             >
