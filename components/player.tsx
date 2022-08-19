@@ -54,19 +54,25 @@ const Player = ({ songs, activeSong }) => {
   const setActiveSong = useStoreActions((state: any) => state.changeActiveSong)
 
   useEffect(() => {
+    // the requestAnimationFrame will return an id that we can use to cancel later on
     let timerId
 
     if (playing && !isSeeking) {
       const f = () => {
+        // as we are animating we want to setSeek which is going update value in our UI
         setSeek(soundRef.current.seek())
         timerId = requestAnimationFrame(f)
       }
 
       timerId = requestAnimationFrame(f)
+      // return our value and clean up the requestAnimationFrame
       return () => cancelAnimationFrame(timerId)
     }
 
+    // If our conditional was initially false the we want to cancel the animation frame with the timerId
     cancelAnimationFrame(timerId)
+    // this useEffect is going to be interested in two things: playing state and isSeeking state
+    // we want to animate while we're playing not when we're paused and when we're not seeking
   }, [playing, isSeeking])
 
   useEffect(() => {
@@ -119,7 +125,7 @@ const Player = ({ songs, activeSong }) => {
     })
   }
 
-  // When a songs ends, it goes to the next song automatically
+  // When a songs ends, it goes to the next song automatically, seek back manually
   const onEnd = () => {
     // if repeat is activated
     if (repeatRef.current) {
@@ -147,7 +153,7 @@ const Player = ({ songs, activeSong }) => {
     // paresFlaot because we are doing decimals on the seek value because they step by point one every time
     // get e and get the first value out of there
     setSeek(parseFloat(e[0]))
-    // pass this value to seek that value
+    // pass whatever this value is to seek that value
     soundRef.current.seek(e[0])
   }
 
@@ -244,6 +250,7 @@ const Player = ({ songs, activeSong }) => {
             <RangeSlider
               // left to right
               aria-label={['min', 'max']}
+              // increment by 0.1 on the seek bar
               step={0.1}
               min={0}
               id="player-range"
@@ -265,6 +272,7 @@ const Player = ({ songs, activeSong }) => {
             </RangeSlider>
           </Box>
           <Box width="10%" textAlign="right">
+            {/* pull in the formatTime for our seek bar */}
             <Text fontSize="xs">{formatTime(duration)}</Text>
           </Box>
         </Flex>
